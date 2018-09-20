@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Transaction</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Form</h1>
+    <form action="#" th:action="@{/web/CreateTransaction}" th:object="${transaction}" method="post">
+    	<p>Enter TransactionType: <input type="text" th:field="*{transactionType}" /></p>
+        <p>Enter SettleDate: <input type="datetime-local" th:field="*{settleDate}" /></p>
+        <p>Enter amount: <input type="text" th:field="*{amount}" /></p>
+        <p>Enter destinationId: <input type="text" th:field="*{destinationId}" /></p>
+        <p>Enter pinNumber: <input type="text" th:field="*{pinNumber}" /></p>
+         <p>Enter ipaddress: <input type="text" th:field="*{ipaddress}" /></p>
+          <p>Enter notes: <input type="text" th:field="*{notes}" /></p>
+           <p>Enter status: <input type="text" th:field="*{status}" /></p>
+           <p> <input type="text" hidden="true" th:field="*{ticketNumber}" /></p>
+           <p> <input type="text" hidden="true" th:field="*{id}" /></p>
+          <!--  <p> <input type="text" hidden="true" th:field="*{distributions}"/></p> -->
+          
+	<table>
+            <thead>
+                <tr>
+                    <th> accountNumber</th>
+                    <th> amount</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr th:each="distribution, itemStat : *{distributions}">
+                    <td><input type="text"  th:field="*{distributions[__${itemStat.index}__].accountNumber}" /></td>
+                    <td><input type="text" th:field="*{distributions[__${itemStat.index}__].amount}" /></td>
+                </tr>
+            </tbody>
+            
+        </table>
+	
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
+</body>
+</html>
